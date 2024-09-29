@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Psy\Readline\Userland;
 
 class User extends Authenticatable
 {
@@ -20,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'contact_no',
+        'category_id',
+        'profile_pic'
     ];
 
     /**
@@ -43,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function Userhobby(): HasMany
+    {
+        return $this->hasMany(UserHobby::class)->with('hobby');
     }
 }

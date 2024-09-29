@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hobbies', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
+        Schema::create('user_hobbies', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('user_id');
+            $table->bigInteger('hobby_id');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hobbies');
+        Schema::dropIfExists('user_hobbies');
     }
 };

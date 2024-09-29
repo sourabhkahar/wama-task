@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Hobby;
 use App\Models\User;
+use App\Models\UserHobby;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +16,49 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $Category = Category::create([
+            'name' => 'Developer'
+        ]);
 
-        User::factory()->create([
+        $Category = Category::create([
+            'name' => 'Designer'
+        ]);
+
+        $Hobby1 = Hobby::create([
+            'name' => 'Music'
+        ]);
+
+        $Hobby2 = Hobby::create([
+            'name' => 'Games'
+        ]);
+
+        $Hobby3 = Hobby::create([
+            'name' => 'Football'
+        ]);
+
+        $Hobby4 = Hobby::create([
+            'name' => 'Reading,'
+        ]);
+
+        $User = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'category_id' => $Category->id,
+            'contact_no'    => ''
         ]);
+
+        UserHobby::create(
+            [
+                'user_id' => $User->id, 
+                'hobby_id' => $Hobby1->id 
+            ]
+        );
+        UserHobby::create(
+            [
+                'user_id' => $User->id, 
+                'hobby_id' => $Hobby2->id 
+            ]
+        );
+        
     }
 }
